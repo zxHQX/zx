@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.powertime.dao.SysLogMapper" >
+  <resultMap id="BaseResultMap" type="cn.powertime.entity.SysLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="desc_info" property="descInfo" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="adr" property="adr" jdbcType="VARCHAR" />
+    <result column="backups" property="backups" jdbcType="INTEGER" />
+    <result column="is_success" property="isSuccess" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, type, desc_info, remark, adr, backups, is_success, create_time, create_user_id
+  </sql>
+
+
+  <!--日志详情-->
+  <select id="details" resultType="cn.powertime.entity.SysLog" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from sys_log
+    where id = #{id}
+  </select>
+
+  <!--查所有日志并分页-->
+  <select id="list1" resultType="cn.powertime.vo.LogExcelExportVo" >
+    select
+    log.type,log.desc_info,log.remark,log.adr,log.backups,log.is_success,log.create_time,u.account,u.username
+    from sys_log log,sys_user u
+    WHERE log.create_time BETWEEN #{start} and #{end}
+    and log.create_user_id = u.id
+    <if test="user_id != null">
+      and create_user_id = #{user_id}
+    </if>
+    <if test="type != null and type != 0">
+      and log.type = #{type}
+    </if>
+  </select>
+
+  <!--根据日期删除某个时间之前的日志-->
+  <delete id="deleteByDate" >
+
+    DELETE from sys_log
+    where create_time BETWEEN "2010.01.01" AND #{date}
+  </delete>
+
+  <!--将日志设置成已备份状态-->
+  <update id="setBackup">
+    update sys_log SET backups=1
+    where create_time BETWEEN #{start} and #{end}
+  </update>
+
+</mapper>

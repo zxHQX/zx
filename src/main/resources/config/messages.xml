@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<!--字典功能日志导航数据-->
+        <!--添加字典信息-->
+        <entry key="user.login">以[{0}]作为用户名尝试登录</entry> <!--对应 日志数据-->
+        <entry key="user.login.message">[{1}]</entry><!--对应 操作详情-->
+        <entry key="user.login.type">[{2}]</entry><!--对应 操作类型-->
+
+        <entry key="cpsCourse.add">添加课程：[{0}]</entry>
+        <entry key="cpsCourse.add.message">[{1}]</entry>
+        <entry key="cpsCourse.add.type">[{2}]</entry>
+
+        <entry key="cpsClassify.add">添加[{0}]分类</entry>
+        <entry key="cpsClassify.add.message">[{1}]</entry>
+        <entry key="cpsClassify.add.type">[{2}]</entry>
+
+        <!--删除字典信息-->
+        <entry key="dict.del">删除字典信息</entry>
+        <entry key="dict.del.message">[{1}]</entry>
+        <entry key="dict.del.type">[{2}]</entry>
+</properties>
