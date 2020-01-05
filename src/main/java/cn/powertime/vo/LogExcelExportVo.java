@@ -17,7 +17,7 @@ public class LogExcelExportVo extends BaseRowModel implements Serializable{
 
 
     public LogExcelExportVo(){}
-    public LogExcelExportVo(SysLog sysLog, com.powertime.audiltor.entity.SysUser sysUser) {
+    public LogExcelExportVo(SysLog sysLog, cn.powertime.entity.SysUser sysUser) {
         this.username = sysUser.getUsername();
         this.account = sysUser.getAccount();
         this.type = sysLog.getType();

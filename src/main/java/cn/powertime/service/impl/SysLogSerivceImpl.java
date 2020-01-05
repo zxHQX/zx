@@ -3,6 +3,7 @@ package cn.powertime.service.impl;
 import cn.powertime.dao.SysLogMapper;
 import cn.powertime.dao.SysUserRoleMapper;
 import cn.powertime.entity.SysLog;
+import cn.powertime.entity.SysUser;
 import cn.powertime.service.SysLogService;
 import cn.powertime.utils.GetCurrentTimeUtil;
 import cn.powertime.utils.excel.EasyExcelUtils;
@@ -36,7 +37,7 @@ public class SysLogSerivceImpl extends ServiceImpl<SysLogMapper, SysLog> impleme
     SysUserRoleMapper sysUserRoleMapper;
 
     public List<LogExcelExportVo> list1(Integer page, Integer size, String start, String end, Integer type, String userId) {
-        com.powertime.audiltor.entity.SysUser sysUser = null;
+        SysUser sysUser = null;
 
         if (start == null || "".equals(start)) {
             start = "1998.02.28";

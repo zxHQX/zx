@@ -1,4 +1,4 @@
-package com.powertime.audiltor.entity;
+package cn.powertime.entity;
 
 public class SysUser {
 
