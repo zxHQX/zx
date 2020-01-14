@@ -4,12 +4,12 @@
 	<request id="1001.301" act="update">
 		<database id="systemDatabase" table="sys_user">
 			<update>
-				<field name="account" alias="user" type="string"/>
+				<field name="account" alias="account" type="string"/>
 				<field name="username" alias="name" type="string" />
 				<field name="phone" alias="phone" type="string" />
 				<field name="introduction" alias="mark" type="string"/>
 				<field name="role"  alias="role" type="int"/>
-				<field name="password" alias="pwd" type="password" />
+				<field name="password" alias="passoword" type="password" />
 				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
 				<where>
 					<field name="id" alias="id" operate="=" type="string" default="null"/>
@@ -126,10 +126,11 @@
 	<request id="1007.301" act="update">
 		<database id="systemDatabase" table="model">
 			<update>
+			<field name="name" alias="name" type="string" title="名称" />
 				<field name="name" alias="name" type="string" title="名称" />
 				<field name="type" alias="type" type="int" title="导入类型ID" />
 				<field name="application_id"  alias="appId" type="string" title="应用id"/>
-				<field name="status"  alias="status" type="int" title="状态"/>
+				<field name="status"  alias="." type="int" title="状态"/>
 				<field name="update_id" alias="." type="int" title="更新人ID"/>
 				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
 				<where>
