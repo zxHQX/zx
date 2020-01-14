@@ -1,0 +1,191 @@
+﻿<powertime>
+	<!-- 用户插入 -->
+	<request id="1001.101" act="insert" retType="besides">
+		<database id="systemDatabase" table="sys_user">
+			<insert>
+				<field name="id" alias="id" type="custom"/>
+				<field name="account" alias="account" type="string" verify="103"/>
+				<field name="username" alias="name" type="string" />
+				<field name="phone" alias="phone" type="string" />
+				<field name="introduction" alias="mark" type="string"/>
+				<field name="role"  alias="role" type="int" default="7"/>
+				<field name="password" alias="pwd" type="string" />
+				<field name="pwd_salt" alias="salt" type="string"/>
+				<field name="status" alias="status" type="int" default="1"/>
+				<field name="create_time" alias="." type="int" default="now()" title="创建时间" />
+				<field name="mod_passwd_date" alias="." type="int" default="now()" title="密码修改时间" />
+				<field name="update_time" alias="." type="int" default="now()" title="修改时间" />
+			</insert>
+		</database>
+	</request>
+	<!-- 角色表 -->
+	<request id="1002.101" act="insert" retType="besides">
+		<database id="systemDatabase" table="sys_role" >
+			<insert>
+				<field name="id" alias="id" type="custom"/>
+				<field name="name" alias="nm" type="string" title="角色名称" />
+				<field name="code" alias="cd" type="string" title="编码" />
+				<field name="sort_num" alias="sn" type="int" title="序号" />
+				<field name="des" alias="des" type="string" title="角色说明" />
+				<field name="del" alias="dl" type="string" title="可删除标记" default="1" />
+				<field name="status" alias="st" type="int" title="状态" default="1"/>
+				<field name="create_time" alias="." type="int" default="now()" title="创建时间" />
+				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
+			</insert>
+		</database>
+	</request>
+	<!-- 应用信息表 -->
+	<request id="1003.101" act="insert" retType="besides">
+		<database id="systemDatabase" table="application" >
+			<insert>
+				<field name="name" alias="name" type="string" title="标题" />
+				<field name="ip" alias="ip" type="string" title="IP地址" />
+				<field name="port" alias="port" type="int" title="端口" />
+				<field name="username" alias="user" type="string" title="用户名" />
+				<field name="password" alias="pwd" type="string" title="密码" />
+				<field name="description" alias="mark" type="string" title="业务介绍" />
+				<field name="status" alias="status" type="string" title="状态" />
+			</insert>
+		</database>
+	</request>
+	<!-- 数据源表插入 -->
+	<request id="1004.101" act="insert" retType="besides">
+		<database id="systemDatabase" table="sys_db" >
+			<insert>
+				<field name="name" alias="name" type="string" title="数据库名" />
+				<field name="type" alias="type" type="int" title="数据库类型ID" />
+				<field name="ip" alias="ip" type="string" title="IP地址" />
+				<field name="port" alias="port" type="int" title="端口" />
+				<field name="username" alias="person" type="string" title="用户名" />
+				<field name="password" alias="pwd" type="string" title="密码" />
+				<field name="description" alias="business" type="string" title="所属业务" />
+				<field name="title" alias="info" type="string" title="数据库说明" />
+				<field name="status" alias="." type="int" title="状态" default="1" />
+				<field name="level" alias="." type="int" title="级别" default="0" />
+				<field name="create_time" alias="." type="int" default="now()" title="创建时间" />
+				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
+			</insert>
+		</database>
+	</request>
+	<!-- 数据导入表插入 -->
+	<request id="1006.101" act="insert" retType="besides">
+		<database id="systemDatabase" table="data_import" >
+			<insert>
+				<field name="id" alias="id" type="custom"/>
+				<field name="name" alias="name" type="string" title="名称" />
+				<field name="type" alias="type" type="int" title="导入类型ID" />
+				<field name="datasource_id"  alias="source" type="int" title="数据源ID"/>
+				<field name="model_id"  alias="model" type="int" title="模型ID"/>
+				<field name="description" alias="info" type="string" title="说明" />
+				<field name="user_id" alias="." type="int" title="创建人ID" default="0" />
+				<field name="process" alias="." type="int" title="进度" default="0" />
+				<field name="time" alias="." type="int" default="now()" title="创建时间" />
+			</insert>
+		</database>
+	</request>
+	<!-- 模板表插入 -->
+	<request id="1007.101" act="insert" retType="besides">
+		<database id="systemDatabase" table="model" >
+			<insert>
+				<field name="id" alias="id" type="custom"/>
+				<field name="name" alias="name" type="string" title="名称" />
+				<field name="type" alias="type" type="int" title="导入类型ID" />
+				<field name="application_id"  alias="appId" type="string" title="应用id"/>
+				<field name="status"  alias="." type="int" title="状态" default="0"/>
+				<field name="create_id" alias="." type="int" title="创建人" default="0" />
+				<field name="update_id" alias="." type="int" title="更新人ID" default="0" />
+				<field name="create_time" alias="." type="int" title="创建时间" default="now()"/>
+				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
+			</insert>
+		</database>
+	</request>
+	<!-- 用户词典数据类型表插入 -->
+	<request id="1008.101" act="insert" retType="besides">
+		<database id="systemDatabase" table="user_dict_type" >
+			<insert>
+				<field name="id" alias="id" type="custom"/>
+				<field name="name" alias="paraName" type="string" title="名称" />
+				<field name="varname" alias="varName" type="string" title="变量名称" />
+				<field name="description" alias="mark" type="string" title="说明" />
+				<field name="status" alias="." type="int" title="状态" default="1" />
+				<field name="create_time" alias="." type="int" default="now()" title="创建时间" />
+				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
+			</insert>
+		</database>
+	</request>
+
+	<!-- 用户词典数据表插入 -->
+	<request id="1009.101" act="insert" retType="besides">
+		<database id="systemDatabase" table="user_dict" >
+			<insert>
+				<field name="id" alias="id" type="custom"/>
+				<field name="name" alias="paraName" type="string" title="名称" />
+				<field name="type_id" alias="fatherId" type="int" title="所属类型ID" />
+				<field name="value" alias="varName" type="string" title="值" />
+				<field name="status" alias="." type="int" title="状态" default="1" />
+				<field name="create_time" alias="." type="int" default="now()" title="创建时间" />
+				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
+			</insert>
+		</database>
+	</request>
+	<!-- 模型属性表 节点插入 -->
+	<request id="1010.101" act="insert" retType="besides">
+		<database id="systemDatabase" table="model_information" >
+			<insert>
+				<field name="id" alias="id" type="custom"/>
+				<field name="property" alias="name" type="string" title="名称" />
+				<field name="x_source" alias="xAxis" type="string" title="x坐标" />
+				<field name="y_target" alias="yAxis" type="string" title="y坐标" />
+				<field name="style" alias="style" type="string" title="节点风格" default="blue" />
+				<field name="model_id" alias="modelId" type="string" title="模型id" />
+				<field name="flag" alias="." type="int" title="状态" default="0" />
+				<field name="type" alias="." type="int" title="节点类型"  default="0"/>
+				<field name="owner" alias="." type="string" title="属主id" default="0"/>
+			</insert>
+		</database>
+	</request>
+	<!-- 模型属性表 节点属性插入 -->
+	<request id="1010.102" act="insert" retType="besides">
+		<database id="systemDatabase" table="model_information" >
+			<insert>
+				<field name="id" alias="id" type="custom"/>
+				<field name="property" alias="name" type="string" title="名称" />
+				<field name="type" alias="type" type="int" title="数据类型id" />
+				<field name="isEmpty" alias="empty" type="int" title="是否为空" default="0"/>
+				<field name="model_id" alias="modelId" type="string" title="模型id" default="0"/>
+				<field name="owner" alias="ownerId" type="string" title="属主id" />
+				<field name="flag" alias="." type="int" title="状态" default="3" />
+			</insert>
+		</database>
+	</request>
+	<!-- 模型属性表 边插入 -->
+	<request id="1010.103" act="insert" retType="besides">
+		<database id="systemDatabase" table="model_information" >
+			<insert>
+				<field name="id" alias="id" type="custom"/>
+				<field name="property" alias="name" type="string" title="名称" />
+				<field name="x_source" alias="source" type="string" title="x坐标" />
+				<field name="y_target" alias="target" type="string" title="y坐标" />
+				<field name="style" alias="style" type="string" title="边风格" default="blue" />
+				<field name="model_id" alias="modelId" type="string" title="模型id" />
+				<field name="flag" alias="flag" type="int" title="边类型" default="1" />
+				<field name="type" alias="." type="int" title="节点类型"  default="0"/>
+				<field name="owner" alias="." type="string" title="属主id" default="0"/>
+			</insert>
+		</database>
+	</request>
+	<!-- 模型属性表 边属性插入 -->
+	<request id="1010.104" act="insert" retType="besides">
+		<database id="systemDatabase" table="model_information" >
+			<insert>
+				<field name="id" alias="id" type="custom"/>
+				<field name="property" alias="name" type="string" title="名称" />
+				<field name="type" alias="type" type="int" title="数据类型id" />
+				<field name="isEmpty" alias="empty" type="int" title="是否为空" default="0"/>
+				<field name="model_id" alias="modelId" type="string" title="模型id" />
+				<field name="owner" alias="ownerId" type="string" title="属主id" />
+				<field name="flag" alias="flag" type="int" title="边类型" default="4" />
+			</insert>
+		</database>
+	</request>
+</powertime>

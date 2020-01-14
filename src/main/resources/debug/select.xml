@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<powertime>
+	<request id="0000.001" act="select" retType="record" title="性别">
+		<database id="systemDatabase" table="sys_dict" cache="yes">
+			<select>
+				<field name="value" type="string" title="值" />
+				<field name="name" type="string" title="名称" />
+				<where fix="status=1 AND type_id=1"/>
+				<order fields="sort_num"/>
+			</select>
+		</database>
+	</request>
+	<request id="0000.002" act="select" retType="record" title="记录状态">
+		<database id="systemDatabase" table="sys_dict" cache="yes">
+			<select>
+				<field name="value" type="string" title="值" />
+				<field name="name" type="string" title="名称" />
+				<where fix="status=1 AND type_id=2"/>
+				<order fields="sort_num"/>
+			</select>
+		</database>
+	</request>
+	<request id="0000.003" act="select" retType="record" title="图元分类">
+		<database id="systemDatabase" table="sys_dict" cache="yes">
+			<select>
+				<field name="value" type="string" title="值" />
+				<field name="name" type="string" title="名称" />
+				<where fix="status=1 AND type_id=3"/>
+				<order fields="sort_num"/>
+			</select>
+		</database>
+	</request>
+	<request id="0000.004" act="select" retType="record" title="是否启用状态">
+		<database id="systemDatabase" table="sys_dict" cache="yes">
+			<select>
+				<field name="value" type="string" title="值" />
+				<field name="name" type="string" title="名称" />
+				<where fix="status=1 AND type_id=4"/>
+				<order fields="sort_num"/>
+			</select>
+		</database>
+	</request>
+	<request id="0000.005" act="select" retType="record" title="电压级别">
+		<database id="systemDatabase" table="sys_dict" cache="yes">
+			<select>
+				<field name="value" type="string" title="值" />
+				<field name="name" type="string" title="名称" />
+				<where fix="status=1 AND type_id=5"/>
+				<order fields="sort_num"/>
+			</select>
+		</database>
+	</request>
+	<request id="0000.006" act="select" retType="record" title="模型类型">
+		<database id="systemDatabase" table="sys_dict" cache="yes">
+			<select>
+				<field name="value" type="string" title="值" />
+				<field name="name" type="string" title="名称" />
+				<where fix="status=1 AND type_id=6"/>
+				<order fields="sort_num"/>
+			</select>
+		</database>
+	</request>
+	<request id="0000.007" act="select" retType="record" title="模型状态">
+		<database id="systemDatabase" table="sys_dict" cache="yes">
+			<select>
+				<field name="value" type="int" title="值" />
+				<field name="name" type="string" title="名称" />
+				<where fix="status=1 AND type_id=7 AND value!='-1'"/>
+				<order fields="sort_num"/>
+			</select>
+		</database>
+	</request>
+	<request id="0000.008" act="select" retType="record" title="图数据类型">
+		<database id="systemDatabase" table="sys_dict" cache="yes">
+			<select>
+				<field name="value" type="int" title="值" />
+				<field name="name" type="string" title="名称" />
+				<where fix="status=1 AND type_id=8"/>
+				<order fields="sort_num"/>
+			</select>
+		</database>
+	</request>
+	<request id="0000.009" act="select" retType="record" title="图对象类型">
+		<database id="systemDatabase" table="sys_dict" cache="yes">
+			<select>
+				<field name="value" type="int" title="值" />
+				<field name="name" type="string" title="名称" />
+				<where fix="status=1 AND type_id=9"/>
+				<order fields="sort_num"/>
+			</select>
+		</database>
+	</request>
+
+	<!-- 用户词典 -->
+	<request id="0000.107" act="select" retType="record" title="数据导入类型">
+		<database id="systemDatabase" table="user_dict" cache="yes">
+			<select>
+				<field name="value" type="int" title="值" />
+				<field name="name" type="string" title="名称" />
+				<where fix="status=1 AND type_id=3"/>
+			</select>
+		</database>
+	</request>
+	<!-- 数据库表查询 -->
+	<request id="0000.101" act="select" retType="record" title="数据库表查询">
+		<database id="systemDatabase" table="sys_db">
+			<select>
+				<field name="name" type="string" title="名称" />
+				<where>
+					<field name="id" alias="dbId" type="int" default="0"/>
+				</where>
+			</select>
+		</database>
+	</request>
+	<!-- 用户管理，获取用户列表 -->
+	<request id="1001.001" act="select" retType="record" title="用户管理">
+		<database id="systemDatabase" table="sys_user">
+			<select>
+				<field name="id" alias="id" auto="true" title="编号" />
+				<field name="account" alias="user" type="string" title="账号" />
+				<field name="username" alias="name" type="string" title="名称" />
+				<field name="phone" alias="phone" type="int" title="电话" />
+				<field name="introduction" alias="mark" type="string" title="备注" />
+				<field name="role" alias="role" type="int" title="角色"/>
+				<field name="role" alias="roleName" type="int" title="角色"  dict="1002.001"/>
+				<field name="status" alias="status" type="int" title="状态"/>
+				<field name="status" alias="statusName" type="int" title="状态"  dict="0000.002"/>
+				<where fix="status &gt;= 0"/>				
+				<order fields="id DESC" />
+			</select>
+			<limit page="page" max="max" />
+		</database>
+	</request>
+
+	<request id="1001.002" act="select" retType="record" title="系统用户名词典">
+		<database id="systemDatabase" table="sys_user">
+			<select>
+				<field name="id AS value" type="int" title="编号" />
+				<field name="username AS name" type="string" title="名称" />
+			</select>
+		</database>
+	</request>
+	<request id="1001.003" act="select" retType="record" title="系统用户账号是否唯一">
+		<database id="systemDatabase" table="sys_user">
+			<select>
+				<field name="id AS value" type="int" title="编号" />
+				<where>
+					<field name="account" alias="account" operate="=" type="string" default="null" verify="noEmpty" title="账号"/>
+				</where>
+			</select>
+		</database>
+	</request>
+	<!-- 用户管理，获取用户密码信息 -->
+	<request id="1001.004" act="select" retType="record" title="获取密码、salt等验证信息">
+		<database id="systemDatabase" table="sys_user">
+			<select>
+				<field name="id" alias="id" auto="true" title="编号" />
+				<field name="username" alias="name" type="string" title="名称" />
+				<field name="password" alias="pwd" type="string" title="密码" />
+				<field name="pwd_salt" alias="phone" type="int" title="加密salt" />
+				<field name="role" alias="role" type="int" title="角色"/>
+				<where fix="status &gt;= 0">
+					<field name="account" alias="account"  type="string" default="null"/>
+				</where>				
+			</select>
+		</database>
+	</request>
+	<!-- 用户管理，根据id获取用户密码信息 -->
+	<request id="1001.005" act="select" retType="record" title="获取密码、salt验证信息">
+		<database id="systemDatabase" table="sys_user">
+			<select>
+				<field name="account" alias="." type="string" title="账号" />
+				<field name="password" alias="." type="string" title="密码" />
+				<field name="pwd_salt" alias="." type="int" title="加密salt" />
+				<where>
+					<field name="id" session="user_id"  type="int" default="0"/>
+				</where>				
+			</select>
+		</database>
+	</request>
+
+	<!-- 查询角色，用于用户管理中的角色选择项 -->
+	<request id="1002.001" act="select" retType="record" title="获取角色">
+		<database id="systemDatabase" table="sys_role" cache="yes">
+			<select>
+				<field name="id AS value" type="int" />
+				<field name="name" type="string" />
+			</select>
+		</database>
+	</request>
+	<request id="1002.002" act="select" retType="record" title="获取角色信息">
+		<database id="systemDatabase" table="sys_role">
+			<select>
+				<field name="id" alias="id" type="int" />
+				<field name="name" alias="name"  type="string"/>
+				<field name="code" alias="type"  type="string"/>
+				<field name="des" alias="mark" type="string"/>
+				<where fix="status=1"/>
+			</select>
+			<limit page="page" max="max" />
+		</database>
+	</request>
+	<!-- 查询应用信息 -->
+	<request id="1003.001" act="select" retType="record" title="应用信息查询">
+		<database id="systemDatabase" table="application">
+			<select>
+				<field name="id" type="int" />
+				<field name="name" type="string" />
+				<field name="ip"  alias="ip" type="string" title="IP地址"/>
+				<field name="concat(ip,':',port)"  alias="ipport" type="string" title="IP端口"/>
+				<field name="port" type="int" />
+				<field name="username" alias="user" type="string" />
+				<field name="password" alias="pwd" type="string" />
+				<field name="description"  alias="mark" type="string" />
+				<field name="status" alias="status" type="string"/>
+				<field name="status" alias="statusName" type="string" dict="0000.004"/>
+				<field name="image is NOT NULL" alias="image" type="int"/>
+				<order fields="id DESC" />
+			</select>
+			<limit page="page" max="max" />
+		</database>
+	</request>
+	<!-- 查询应用信息名 -->
+	<request id="1003.002" act="select" retType="record" title="应用信息查询">
+		<database id="systemDatabase" table="application">
+			<select>
+				<field name="id AS value" type="int" title="应用ID"/>
+				<field name="name" type="string" title="应用名称"/>
+			</select>
+			<limit page="page" max="max" />
+		</database>
+	</request>
+	<!-- 数据源信息 -->
+	<request id="1004.001" act="select" retType="record" title="数据源信息">
+		<database id="systemDatabase" table="sys_db">
+			<select>
+				<field name="id" type="int" title="编号"/>
+				<field name="name" type="string" title="数据库名"/>
+				<field name="type" type="int" title="数据库类型"/>
+				<field name="type" alias="typeName" type="int" title="数据库类型" dict="1005.001"/>
+				<field name="ip" alias="ip" type="string" title="IP地址"/>
+				<field name="concat(ip,':',port)" alias="ipport" type="string"/>
+				<field name="port" type="int" title="端口"/>
+				<field name="password" alias="pwd" type="int" title="密码"/>
+				<field name="username" alias="person" type="string" title="用户名"/>
+				<field name="title" alias="info" type="string" title="数据库说明"/>
+				<field name="description" alias="business" type="string" title="所属业务"/>
+				<field name="status" alias="status" type="string" title="状态"/>
+				<field name="status" alias="statusName" type="string" title="状态" dict="0000.004"/>
+				<field name="DATE_FORMAT(update_time,'%Y-%m-%d')" alias="date" type="string" title="更改日期"/>
+				<where>
+					<field name="name" alias="name" operate="like" type="string"/>
+					<field name="type" alias="type" operate="like" type="string"/>
+					<field name="description" alias="business" operate="like" type="string"/>
+					<field name="username" alias="person" operate="like" type="string"/>
+					<field name="title" alias="info" operate="like" type="string"/>
+				</where>
+				<order fields="id DESC" />
+			</select>
+			<limit page="page" max="max" />
+		</database>
+	</request>
+	<request id="1004.002" act="select" retType="record" title="数据源词典">
+		<database id="systemDatabase" table="sys_db">
+			<select>
+				<field name="id AS value" type="int" title="编号"/>
+				<field name="title AS name" type="string" title="数据库说明"/>
+			</select>
+		</database>
+	</request>
+	<request id="1004.003" act="select" retType="record" title="数据源连接信息">
+		<database id="systemDatabase" table="sys_db a LEFT JOIN sys_dbtype b ON a.type=b.id">
+			<select>
+				<field name="a.name" type="string" title="数据库名"/>
+				<field name="ip" alias="ip" type="string" title="IP地址"/>
+				<field name="port" type="int" title="端口"/>
+				<field name="username" alias="person" type="string" title="用户名"/>
+				<field name="password" alias="pwd" type="int" title="密码"/>
+				<field name="b.driverClass AS class" alias="class" type="int" title="数据库驱动类"/>
+				<field name="b.urlFormat AS url" alias="url" type="int" title="连接URL"/>
+				<where>
+					<field name="a.id" alias="dbId" type="int" default="0"/>
+				</where>
+			</select>
+		</database>
+	</request>
+	<!-- 数据库类型 -->
+	<request id="1005.001" act="select" retType="record" title="数据库类型">
+		<database id="systemDatabase" table="sys_dbtype" cache="yes">
+			<select>
+				<field name="id AS value" type="int" title="编号"/>
+				<field name="name" type="string" title="数据库类型名"/>
+			</select>
+		</database>
+	</request>
+	<!-- 数据导入模块信息 -->
+	<request id="1006.001" act="select" retType="record" title="数据导入模块信息">
+		<database id="systemDatabase" table="data_import">
+			<select>
+				<field name="id" type="int" />
+				<field name="name" type="string" title="数据导入名称"/>
+				<field name="datasource_id" alias="source" type="int"/>
+				<field name="datasource_id" alias="sourceName" type="int" title="数据源ID" dict="1004.002" timeout="30"/>
+				<field name="model_id" alias="model" type="int" title="模型ID"/>
+				<field name="model_id" alias="modelName" type="int" title="模型ID" dict="1007.002" timeout="60"/>
+				<field name="description" alias="info" type="string" title="介绍信息"/>
+				<field name="type" type="int" title="数据源类型" dict="0000.107"/>
+				<field name="process" alias="progress" type="int" title="进度%" />
+				<field name="time" alias="date" type="string" title="时间" />
+				<field name="user_id" alias="person" type="string" title="操作人" />
+				<order fields="id DESC" />
+			</select>
+			<limit page="page" max="max" />
+		</database>
+	</request>
+	<!-- 模型信息 -->
+	<request id="1007.001" act="select" retType="record" title="模型信息">
+		<database id="systemDatabase" table="model">
+			<select>
+				<field name="id" type="int" />
+				<field name="name" type="string" title="名称"/>
+				<field name="type" alias="type" type="int" title="类型" />
+				<field name="type" alias="typec" type="int" title="类型" dict="0000.107"/>
+				<field name="application_id" alias="appId" type="int" title="所属应用ID"/>
+				<field name="status" alias="status" type="int" title="模型状态" />
+				<field name="application_id" alias="appIdc" type="int" title="所属应用ID" dict="1003.002" timeout="30"/>
+				<field name="status" type="int" alias="statusc" title="模型状态" dict="0000.007"/>
+				<field name="0" alias="isDel" type="int" title="是否删除标记"/>
+				<field name="create_id" alias="crtPerson" type="int" title="创建人" />
+				<field name="update_id" alias="modPerson" type="int" title="修改人" />
+				<where fix="status&gt;=0">
+					<field name="name" alias="name" type="String" operate="like"/>
+					<field name="application_id" alias="appId" type="int" />
+					<field name="create_id" alias="crtPerson" type="int" />
+				</where>
+			</select>
+			<limit page="page" max="max" />
+		</database>
+	</request>
+	<!-- 模型词典 -->
+	<request id="1007.002" act="select" retType="record" title="模型词典">
+		<database id="systemDatabase" table="model">
+			<select>
+				<field name="id AS value" type="int" />
+				<field name="name" type="string" title="名称"/>
+			</select>
+		</database>
+	</request>
+	
+	<!--模型用户-->
+	<request id="1007.003" act="select" retType="record" title="用户">
+		<database id="systemDatabase" table="sys_user ">
+			<select>
+				<field name="id AS value" type="int" />
+				<field name="account as name" type="string" title="名称"/>
+				<where fix="id in (select create_id from model) and status &gt;= 0"/>
+			</select>
+		</database>
+	</request>
+
+	<!-- 模型属性表信息 -->
+	<request id="1010.001" act="select" retType="record" title="模型属性信息-节点">
+		<database id="systemDatabase" table="model_information">
+			<select>
+				<field name="concat('node',id) as id" alias="id" type="int" />
+				<field name="property" alias="label" type="string" title="属性名"/>
+				<field name="x_source" alias="x" type="int" title="x坐标"/>
+				<field name="y_target" alias="y" type="int" title="y坐标"/>
+				<field name="style" alias="style" type="int" title="节点风格"/>
+				<where fix="flag=0 AND owner=0">
+					<field name="model_id" alias="modelId" type="int" default="0"/>
+				</where>
+			</select>
+		</database>
+	</request>
+	<!-- 模型属性表信息 -->
+	<request id="1010.002" act="select" retType="record" title="模型属性信息-某个节点的属性">
+		<database id="systemDatabase" table="model_information">
+			<select>
+				<field name="id" type="int" />
+				<field name="property" alias="name" type="string" title="属性名"/>
+				<field name="type" alias="type" type="int" title="数据类型"/>
+				<field name="type" alias="typec" type="int" title="数据类型名" dict="0000.008"/>
+				<field name="isEmpty" alias="empty" type="int" title="是否可以为空"/>
+				<where>
+					<field name="owner" alias="ownerId" type="int" default="-1"/>
+				</where>
+			</select>
+		</database>
+	</request>
+	<!-- 模型属性表信息 -->
+	<request id="1010.003" act="select" retType="record" title="模型属性信息-边">
+		<database id="systemDatabase" table="model_information">
+			<select>
+				<field name="id" type="int" />
+				<field name="property" alias="label" type="string" title="属性名"/>
+				<field name="concat('node',x_source) as x_source" alias="source" type="int" title="源节点id"/>
+				<field name="concat('node',y_target) as y_target" alias="target" type="int" title="目标节点id"/>
+				<field name="flag" alias="flag" type="int" title="边类型"/>
+				<where fix="(flag=1 OR flag=2) AND owner=0">
+					<field name="model_id" alias="modelId" type="int" default="-1"/>
+				</where>
+			</select>
+		</database>
+	</request>
+	<!-- 模型属性表信息 -->
+	<request id="1010.004" act="select" retType="record" title="模型属性信息-某个边的属性">
+		<database id="systemDatabase" table="model_information">
+			<select>
+				<field name="id" type="int" />
+				<field name="property" alias="name" type="string" title="属性名"/>
+				<field name="type" alias="type" type="int" title="数据类型"/>
+				<field name="type" alias="typec" type="int" title="数据类型名"  dict="0000.008" />
+				<field name="isEmpty" alias="empty" type="int" title="是否可以为空"/>
+				<where>
+					<field name="owner" alias="ownerId" type="int" default="-1"/>
+				</where>
+			</select>
+		</database>
+	</request>
+	<!-- 模型属性表信息 -->
+	<request id="1010.005" act="select" retType="record" title="模型属性信息-节点名词典">
+		<database id="systemDatabase" table="model_information">
+			<select>
+				<field name="id AS value" type="int" title="节点ID" />
+				<field name="property AS name" type="string" title="属性名"/>
+				<where fix="flag=0 AND owner=0">
+					<field name="model_id" alias="modelId" type="int" default="0"/>
+				</where>
+			</select>
+		</database>
+	</request>
+	
+	<!-- 模型详细信息 -->
+	<request id="1010.006" act="select" retType="record" title="模型信息">
+		<database id="systemDatabase" table="model">
+			<select>
+				<field name="application_id" alias="type" type="int" title="所属应用ID" dict="1003.002" timeout="30"/>
+				<field name="create_id" alias="crtPerson" type="int" title="创建人" dict="1010.007"/>
+				<field name="update_id" alias="modPerson" type="int" title="修改人" dict="1010.007"/>
+				<field name="DATE_FORMAT(create_time,'%Y-%d-%m %h:%i:%s') as create_time" alias="create_time" type="string" title="创建时间" />
+				<field name="DATE_FORMAT(update_time,'%Y-%d-%m %h:%i:%s') as update_time" alias="update_time" type="string" title="修改时间" />
+				<where>
+					<field name="id" alias="id" type="int" default="0"/>
+				</where>
+			</select>
+		</database>
+	</request>
+	
+	<request id="1010.007" act="select" retType="record" title="用户">
+		<database id="systemDatabase" table="sys_user" cache="yes">
+			<select>
+				<field name="id AS value" type="int" title="值" />
+				<field name="account as name" type="string" title="名称" />
+			</select>
+		</database>
+	</request>
+</powertime>

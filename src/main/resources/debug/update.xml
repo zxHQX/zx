@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<powertime>
+	<!-- 系统用户表修改 -->
+	<request id="1001.301" act="update">
+		<database id="systemDatabase" table="sys_user">
+			<update>
+				<field name="account" alias="user" type="string"/>
+				<field name="username" alias="name" type="string" />
+				<field name="phone" alias="phone" type="string" />
+				<field name="introduction" alias="mark" type="string"/>
+				<field name="role"  alias="role" type="int"/>
+				<field name="password" alias="pwd" type="password" />
+				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
+				<where>
+					<field name="id" alias="id" operate="=" type="string" default="null"/>
+				</where>				
+			</update>
+		</database>
+	</request>
+	<!-- 系统用户密码修改 请求号和查询密码请求号相同，所以都是005结尾的 -->
+	<request id="1001.005" act="update">
+		<database id="systemDatabase" table="sys_user">
+			<update>
+				<field name="password" alias="pwd" type="string" />
+				<field name="pwd_salt" alias="salt" type="string" />
+				<field name="update_time" alias="." type="int" default="now()"/>
+				<where>
+					<field name="id" session="user_id" operate="=" type="string" default="null"/>
+				</where>				
+			</update>
+		</database>
+	</request>
+	<!-- 角色表修改 -->
+	<request id="1002.301" act="update">
+		<database id="systemDatabase" table="sys_role">
+			<update>
+				<field name="name" alias="name" type="string" title="角色名称" />
+				<field name="code" alias="type" type="string" title="编码" />
+				<field name="des" alias="mark" type="string" title="角色说明" />
+				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
+				<where>
+					<field name="id" alias="id" operate="=" type="string" default="null"/>
+				</where>				
+			</update>
+		</database>
+	</request>
+	<!-- 应用信息表修改 -->
+	<request id="1003.301" act="update">
+		<database id="systemDatabase" table="application">
+			<update>
+				<field name="name" alias="name" type="string" title="标题" />
+				<field name="ip" alias="ip" type="string" title="IP地址" />
+				<field name="port" alias="port" type="int" title="端口" />
+				<field name="username" alias="user" type="string" title="用户名" />
+				<field name="password" alias="pwd" type="string" title="密码" />
+				<field name="description" alias="mark" type="string" title="业务介绍" />
+				<field name="status" alias="status" type="string" title="状态" />
+				<where>
+					<field name="id" alias="id" operate="=" type="string" default="null"/>
+				</where>				
+			</update>
+		</database>
+	</request>
+	<!-- 应用信息表 更新上传文件为空，并删除该文件-->
+	<request id="1003.302" act="update" retType="delete_upload">
+		<database id="systemDatabase" table="application">
+			<update>
+				<field name="image" alias="." type="int" default="null" title="文件名"/>
+				<where>
+					<field name="id" alias="id" operate="=" type="int" default="0"/>
+				</where>
+			</update>
+		</database>
+		<next id="1003.303" act="select"/>
+	</request>
+	<!-- 应用信息表 删除上传的文件 -->
+	<request id="1003.303" act="select" pathname="application/%id" retType="delete_upload">
+		<database id="systemDatabase" table="application">
+			<select>
+				<field name="id" alias="id"/>
+				<where>
+					<field name="id" alias="id" type="int" default="0"/>
+				</where>
+			</select>
+		</database>
+	</request>
+
+	<!-- 数据源表修改 -->
+	<request id="1004.301" act="update">
+		<database id="systemDatabase" table="sys_db">
+			<update>
+				<field name="name" alias="name" type="string" title="数据库名" />
+				<field name="type" alias="type" type="int" title="数据库类型ID" />
+				<field name="ip" alias="ip" type="string" title="IP地址" />
+				<field name="port" alias="port" type="int" title="端口" />
+				<field name="username" alias="person" type="string" title="用户名" />
+				<field name="password" alias="pwd" type="string" title="密码" />
+				<field name="description" alias="business" type="string" title="所属业务" />
+				<field name="title" alias="info" type="string" title="数据库说明" />
+				<field name="status" alias="status" type="int" title="状态"/>
+				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
+				<where>
+					<field name="id" alias="id" operate="=" type="string" default="null"/>
+				</where>				
+			</update>
+		</database>
+	</request>
+	<!-- 数据导入表修改 -->
+	<request id="1006.301" act="update">
+		<database id="systemDatabase" table="data_import">
+			<update>
+				<field name="name" alias="name" type="string" title="名称" />
+				<field name="type" alias="type" type="int" title="导入类型ID" />
+				<field name="datasource_id"  alias="source" type="int" title="数据源ID"/>
+				<field name="model_id"  alias="model" type="int" title="模型ID"/>
+				<field name="description" alias="info" type="string" title="说明" />
+				<field name="user_id" alias="." type="int" title="创建人ID" default="0" />
+				<field name="time" alias="." type="int" default="now()" title="创建时间" />
+				<where>
+					<field name="id" alias="id" operate="=" type="string" default="null"/>
+				</where>				
+			</update>
+		</database>
+	</request>
+	<!-- 模板表修改 -->
+	<request id="1007.301" act="update">
+		<database id="systemDatabase" table="model">
+			<update>
+				<field name="name" alias="name" type="string" title="名称" />
+				<field name="type" alias="type" type="int" title="导入类型ID" />
+				<field name="application_id"  alias="appId" type="string" title="应用id"/>
+				<field name="status"  alias="status" type="int" title="状态"/>
+				<field name="update_id" alias="." type="int" title="更新人ID"/>
+				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
+				<where>
+					<field name="id" alias="id" operate="=" type="string" default="null"/>
+				</where>
+			</update>
+		</database>
+	</request>
+	<!-- 用户词典数据类型表修改 -->
+	<request id="1008.301" act="update">
+		<database id="systemDatabase" table="user_dict_type">
+			<update>
+				<field name="name" alias="paraName" type="string" title="名称" />
+				<field name="varname" alias="varName" type="string" title="变量名称" />
+				<field name="description" alias="mark" type="string" title="说明" />
+				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
+				<where>
+					<field name="id" alias="id" operate="=" type="string" default="null"/>
+				</where>
+			</update>
+		</database>
+	</request>
+	<!-- 用户词典数据表修改 -->
+	<request id="1009.301" act="update">
+		<database id="systemDatabase" table="user_dict">
+			<update>
+				<field name="name" alias="paraName" type="string" title="名称" />
+				<field name="value" alias="varName" type="string" title="值" />				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
+				<where>
+					<field name="id" alias="id" operate="=" type="string" default="null"/>
+				</where>
+			</update>
+		</database>
+	</request>
+	<!-- 模型属性表 节点修改 -->
+	<request id="1010.301" act="update">
+		<database id="systemDatabase" table="model_information">
+			<update>
+				<field name="property" alias="name" type="string" title="名称" />
+				<field name="x_source" alias="xAxis" type="string" title="x坐标" />
+				<field name="y_target" alias="yAxis" type="string" title="y坐标" />
+				<field name="style" alias="style" type="string" title="节点风格"/>
+				<where>
+					<field name="id" alias="id" operate="=" type="string" default="null"/>
+				</where>
+			</update>
+		</database>
+	</request>
+	<!-- 模型属性表 节点属性修改 -->
+	<request id="1010.302" act="update">
+		<database id="systemDatabase" table="model_information">
+			<update>
+				<field name="property" alias="name" type="string" title="名称" />
+				<field name="type" alias="type" type="int" title="数据类型id" />
+				<field name="isEmpty" alias="empty" type="int" title="是否为空"/>
+				<where>
+					<field name="id" alias="id" operate="=" type="string" default="null"/>
+				</where>
+			</update>
+		</database>
+	</request>
+	<!-- 模型属性表 边修改 -->
+	<request id="1010.303" act="update">
+		<database id="systemDatabase" table="model_information">
+			<update>
+				<field name="property" alias="name" type="string" title="名称" />
+				<field name="style" alias="style" type="string" title="边风格"/>
+				<where>
+					<field name="id" alias="id" operate="=" type="string" default="null"/>
+				</where>
+			</update>
+		</database>
+	</request>
+	<!-- 模型属性表 边属性修改 -->
+	<request id="1010.304" act="update">
+		<database id="systemDatabase" table="model_information">
+			<update>
+				<field name="property" alias="name" type="string" title="名称" />
+				<field name="type" alias="type" type="int" title="数据类型id" />
+				<field name="isEmpty" alias="empty" type="int" title="是否为空"/>
+				<where>
+					<field name="id" alias="id" operate="=" type="string" default="null"/>
+				</where>
+			</update>
+		</database>
+	</request>
+
+</powertime>

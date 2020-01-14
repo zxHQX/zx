@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<powertime>
+	<!-- 用户表 逻辑删除 -->
+	<request id="1001.201" act="update">
+		<database id="systemDatabase" table="sys_user">
+			<update>
+				<field name="status" alias="." type="int" title="状态" default="-1"/>
+				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
+				<where fix="del&lt;2">
+					<field name="id" alias="id" operate="IN" type="int" default="null"/>
+				</where>
+			</update>
+		</database>
+	</request>
+
+	<!-- 角色逻辑删除 -->
+	<request id="1002.201" act="update">
+		<database id="systemDatabase" table="sys_role">
+			<update>
+				<field name="status" alias="."  default="-1" />
+				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
+				<where>
+					<field name="id" alias="id" operate="=" type="int" default="0"/>
+				</where>
+			</update>
+		</database>
+	</request>
+	<!-- 应用信息删除 -->
+	<request id="1003.201" act="delete" retType="besides">
+		<database id="systemDatabase" table="application">
+			<delete>
+				<where>
+					<field name="id" alias="id" operate=" IN " type="int" default="null"/>
+				</where>
+			</delete>
+		</database>		
+	</request>
+	<!-- 数据源删除 -->
+	<request id="1004.201" act="delete" retType="besides">
+		<database id="systemDatabase" table="sys_db">
+			<delete>
+				<where>
+					<field name="id" alias="id" operate=" IN "  type="int" default="null"/>
+				</where>
+			</delete>
+		</database>		
+	</request>
+	<!-- 数据导入删除 -->
+	<request id="1006.201" act="delete" retType="besides">
+		<database id="systemDatabase" table="data_import">
+			<delete>
+				<where>
+					<field name="id" alias="id" operate=" IN "  type="int" default="null"/>
+				</where>
+			</delete>
+		</database>		
+	</request>
+	<!-- 模型表 逻辑删除 -->
+	<request id="1007.201" act="update">
+		<database id="systemDatabase" table="model">
+			<update>
+				<field name="status" alias="." type="int" title="状态" default="-1"/>
+				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
+				<where>
+					<field name="id" alias="id" operate="IN" type="int" default="null"/>
+				</where>
+			</update>
+		</database>
+	</request>
+	<!-- 用户词典数据类型表 逻辑删除 -->
+	<request id="1008.201" act="update">
+		<database id="systemDatabase" table="user_dict_type">
+			<update>
+				<field name="status" alias="." type="int" title="状态" default="-1"/>
+				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
+				<where>
+					<field name="id" alias="id" operate="IN" type="int" default="null"/>
+				</where>
+			</update>
+		</database>
+	</request>
+	<!-- 用户词典数据表 逻辑删除 -->
+	<request id="1009.201" act="update">
+		<database id="systemDatabase" table="user_dict">
+			<update>
+				<field name="status" alias="." type="int" title="状态" default="-1"/>
+				<field name="update_time" alias="." type="int" default="now()" title="更新时间" />
+				<where>
+					<field name="id" alias="id" operate="IN" type="int" default="null"/>
+				</where>
+			</update>
+		</database>
+	</request>
+	<!-- 模型属性表 节点、边、节点字段、边字段 删除 -->
+	<request id="1010.201" act="delete" retType="besides">
+		<database id="systemDatabase" table="model_information">
+			<delete>
+				<where>
+					<field name="id" alias="id" operate="="  type="int" default="null"/>
+				</where>
+			</delete>
+		</database>		
+	</request>
+
+</powertime>
