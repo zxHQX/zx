@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<powertime>
-	<InitialPoolSize>100</InitialPoolSize>
-	<MinPoolSize>50</MinPoolSize>
-	<MaxPoolSize>500</MaxPoolSize>
-	<MaxStatements>100</MaxStatements>
-	<MaxIdleTime>60</MaxIdleTime>
-	<AcquireIncrement>10</AcquireIncrement>
-</powertime>

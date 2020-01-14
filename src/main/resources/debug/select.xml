@@ -96,7 +96,7 @@
 	<request id="0000.107" act="select" retType="record" title="数据导入类型">
 		<database id="systemDatabase" table="user_dict" cache="yes">
 			<select>
-				<field name="id AS value" type="int" title="值" />
+				<field name="value" type="int" title="值" />
 				<field name="name" type="string" title="名称" />
 				<where fix="status=1 AND type_id=3"/>
 			</select>
@@ -126,7 +126,7 @@
 				<field name="role" alias="roleName" type="int" title="角色"  dict="1002.001"/>
 				<field name="status" alias="status" type="int" title="状态"/>
 				<field name="status" alias="statusName" type="int" title="状态"  dict="0000.002"/>
-\				<where fix="status &gt;= 0"/>				
+				<where fix="status &gt;= 0"/>				
 				<order fields="id DESC" />
 			</select>
 			<limit page="page" max="max" />
@@ -152,14 +152,14 @@
 		</database>
 	</request>
 	<!-- 用户管理，获取用户密码信息 -->
-	<request id="1001.004" act="select" retType="besides" title="获取密码、salt等验证信息">
+	<request id="1001.004" act="select" retType="record" title="获取密码、salt等验证信息">
 		<database id="systemDatabase" table="sys_user">
 			<select>
-				<field name="id" session="user_id" title="编号" />
-				<field name="username" session="user_name" type="string" title="名称" />
-				<field name="password" type="string" title="密码" />
-				<field name="pwd_salt as salt" type="int" title="加密salt" />
-				<field name="role" type="int" session="user_role" title="角色"/>
+				<field name="id" alias="id" auto="true" title="编号" />
+				<field name="username" alias="name" type="string" title="名称" />
+				<field name="password" alias="pwd" type="string" title="密码" />
+				<field name="pwd_salt" alias="phone" type="int" title="加密salt" />
+				<field name="role" alias="role" type="int" title="角色"/>
 				<where fix="status &gt;= 0">
 					<field name="account" alias="account"  type="string" default="null"/>
 				</where>				
@@ -167,12 +167,12 @@
 		</database>
 	</request>
 	<!-- 用户管理，根据id获取用户密码信息 -->
-	<request id="1001.005" act="select" retType="besides" title="获取密码、salt验证信息">
+	<request id="1001.005" act="select" retType="record" title="获取密码、salt验证信息">
 		<database id="systemDatabase" table="sys_user">
 			<select>
-				<field name="account" type="string" title="账号" />
-				<field name="password" type="string" title="密码" />
-				<field name="pwd_salt as salt" type="int" title="加密salt" />
+				<field name="account" alias="." type="string" title="账号" />
+				<field name="password" alias="." type="string" title="密码" />
+				<field name="pwd_salt" alias="." type="int" title="加密salt" />
 				<where>
 					<field name="id" session="user_id"  type="int" default="0"/>
 				</where>				
@@ -320,14 +320,22 @@
 			<select>
 				<field name="id" type="int" />
 				<field name="name" type="string" title="名称"/>
-				<field name="type" alias="type" type="int" title="类型" dict="0000.107"/>
-				<field name="application_id" alias="appId" type="int" title="所属应用ID" dict="1003.002" timeout="30"/>
-				<field name="status" type="int" title="模型状态" dict="0000.007"/>
+				<field name="type" alias="type" type="int" title="类型" />
+				<field name="type" alias="typec" type="int" title="类型" dict="0000.107"/>
+				<field name="application_id" alias="appId" type="int" title="所属应用ID"/>
+				<field name="status" alias="status" type="int" title="模型状态" />
+				<field name="application_id" alias="appIdc" type="int" title="所属应用ID" dict="1003.002" timeout="30"/>
+				<field name="status" type="int" alias="statusc" title="模型状态" dict="0000.007"/>
 				<field name="0" alias="isDel" type="int" title="是否删除标记"/>
 				<field name="create_id" alias="crtPerson" type="int" title="创建人" />
 				<field name="update_id" alias="modPerson" type="int" title="修改人" />
-				<where fix="status&gt;=0"/>
+				<where fix="status&gt;=0">
+					<field name="name" alias="name" type="String" operate="like"/>
+					<field name="application_id" alias="appId" type="int" />
+					<field name="create_id" alias="crtPerson" type="int" />
+				</where>
 			</select>
+			<limit page="page" max="max" />
 		</database>
 	</request>
 	<!-- 模型词典 -->
@@ -339,15 +347,26 @@
 			</select>
 		</database>
 	</request>
+	
+	<!--模型用户-->
+	<request id="1007.003" act="select" retType="record" title="用户">
+		<database id="systemDatabase" table="sys_user ">
+			<select>
+				<field name="id AS value" type="int" />
+				<field name="account as name" type="string" title="名称"/>
+				<where fix="id in (select create_id from model) and status &gt;= 0"/>
+			</select>
+		</database>
+	</request>
 
 	<!-- 模型属性表信息 -->
 	<request id="1010.001" act="select" retType="record" title="模型属性信息-节点">
 		<database id="systemDatabase" table="model_information">
 			<select>
-				<field name="id" type="int" />
-				<field name="property" alias="name" type="string" title="属性名"/>
-				<field name="x_source" alias="xAxis" type="int" title="x坐标"/>
-				<field name="y_target" alias="yAxis" type="int" title="y坐标"/>
+				<field name="concat('node',id) as id" alias="id" type="int" />
+				<field name="property" alias="label" type="string" title="属性名"/>
+				<field name="x_source" alias="x" type="int" title="x坐标"/>
+				<field name="y_target" alias="y" type="int" title="y坐标"/>
 				<field name="style" alias="style" type="int" title="节点风格"/>
 				<where fix="flag=0 AND owner=0">
 					<field name="model_id" alias="modelId" type="int" default="0"/>
@@ -362,7 +381,7 @@
 				<field name="id" type="int" />
 				<field name="property" alias="name" type="string" title="属性名"/>
 				<field name="type" alias="type" type="int" title="数据类型"/>
-				<field name="type" alias="type" type="int" title="数据类型名" dict="0000.008"/>
+				<field name="type" alias="typec" type="int" title="数据类型名" dict="0000.008"/>
 				<field name="isEmpty" alias="empty" type="int" title="是否可以为空"/>
 				<where>
 					<field name="owner" alias="ownerId" type="int" default="-1"/>
@@ -375,9 +394,9 @@
 		<database id="systemDatabase" table="model_information">
 			<select>
 				<field name="id" type="int" />
-				<field name="property" alias="name" type="string" title="属性名"/>
-				<field name="x_source" alias="source" type="int" title="源节点id"/>
-				<field name="y_target" alias="target" type="int" title="目标节点id"/>
+				<field name="property" alias="label" type="string" title="属性名"/>
+				<field name="concat('node',x_source) as x_source" alias="source" type="int" title="源节点id"/>
+				<field name="concat('node',y_target) as y_target" alias="target" type="int" title="目标节点id"/>
 				<field name="flag" alias="flag" type="int" title="边类型"/>
 				<where fix="(flag=1 OR flag=2) AND owner=0">
 					<field name="model_id" alias="modelId" type="int" default="-1"/>
@@ -392,7 +411,7 @@
 				<field name="id" type="int" />
 				<field name="property" alias="name" type="string" title="属性名"/>
 				<field name="type" alias="type" type="int" title="数据类型"/>
-				<field name="type" alias="type" type="int" title="数据类型名" dict="0000.008"/>
+				<field name="type" alias="typec" type="int" title="数据类型名"  dict="0000.008" />
 				<field name="isEmpty" alias="empty" type="int" title="是否可以为空"/>
 				<where>
 					<field name="owner" alias="ownerId" type="int" default="-1"/>
@@ -409,6 +428,31 @@
 				<where fix="flag=0 AND owner=0">
 					<field name="model_id" alias="modelId" type="int" default="0"/>
 				</where>
+			</select>
+		</database>
+	</request>
+	
+	<!-- 模型详细信息 -->
+	<request id="1010.006" act="select" retType="record" title="模型信息">
+		<database id="systemDatabase" table="model">
+			<select>
+				<field name="application_id" alias="type" type="int" title="所属应用ID" dict="1003.002" timeout="30"/>
+				<field name="create_id" alias="crtPerson" type="int" title="创建人" dict="1010.007"/>
+				<field name="update_id" alias="modPerson" type="int" title="修改人" dict="1010.007"/>
+				<field name="DATE_FORMAT(create_time,'%Y-%d-%m %h:%i:%s') as create_time" alias="create_time" type="string" title="创建时间" />
+				<field name="DATE_FORMAT(update_time,'%Y-%d-%m %h:%i:%s') as update_time" alias="update_time" type="string" title="修改时间" />
+				<where>
+					<field name="id" alias="id" type="int" default="0"/>
+				</where>
+			</select>
+		</database>
+	</request>
+	
+	<request id="1010.007" act="select" retType="record" title="用户">
+		<database id="systemDatabase" table="sys_user" cache="yes">
+			<select>
+				<field name="id AS value" type="int" title="值" />
+				<field name="account as name" type="string" title="名称" />
 			</select>
 		</database>
 	</request>

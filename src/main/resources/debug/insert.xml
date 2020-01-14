@@ -152,7 +152,7 @@
 				<field name="property" alias="name" type="string" title="名称" />
 				<field name="type" alias="type" type="int" title="数据类型id" />
 				<field name="isEmpty" alias="empty" type="int" title="是否为空" default="0"/>
-				<field name="model_id" alias="modelId" type="string" title="模型id" />
+				<field name="model_id" alias="modelId" type="string" title="模型id" default="0"/>
 				<field name="owner" alias="ownerId" type="string" title="属主id" />
 				<field name="flag" alias="." type="int" title="状态" default="3" />
 			</insert>
